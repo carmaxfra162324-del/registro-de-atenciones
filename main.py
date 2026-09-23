@@ -19,8 +19,16 @@ def validar_tipo_consulta():
         print("Error: Tipo de consulta no válido. Intente nuevamente.")
 
 
+def calcular_prioridad(tipo_consulta):
+    """Calcula y retorna la prioridad de atención según el tipo de consulta."""
+    if tipo_consulta == "pagos" or tipo_consulta == "matricula":
+        return "Alta"
+    else:
+        return "Baja"
+
+
 def mostrar_menu():
-    """Muestra el menú principal del sistema (función sin retorno)."""
+    """Muestra el menú principal del sistema."""
     print("\n========================================")
     print("  SISTEMA DE ORIENTACIÓN Y REGISTRO")
     print("========================================")
@@ -30,7 +38,7 @@ def mostrar_menu():
 
 
 def registrar_datos_basicos():
-    """Registra los datos aplicando las validaciones anteriores."""
+    """Registra los datos aplicando las validaciones y asignando la prioridad."""
     print("\n--- REGISTRO DE SOLICITUD ---")
     codigo = validar_codigo_estudiante()
     
@@ -38,11 +46,14 @@ def registrar_datos_basicos():
     tipo_consulta = validar_tipo_consulta()
     descripcion = input("Ingrese una descripción breve del caso: ")
     
+    prioridad = calcular_prioridad(tipo_consulta)
+    
     solicitud = {
         "codigo": codigo,
         "nombre": nombre,
         "tipo_consulta": tipo_consulta,
-        "descripcion": descripcion
+        "descripcion": descripcion,
+        "prioridad": prioridad
     }
     return solicitud
 
