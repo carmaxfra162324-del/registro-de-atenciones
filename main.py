@@ -1,4 +1,3 @@
-# Requerimiento 1, 2 y 3: Registro con validaciones modulares 
 def validar_codigo_estudiante():
     """Valida que el código del estudiante no esté vacío y cumpla con la longitud mínima."""
     while True:
@@ -13,15 +12,25 @@ def validar_tipo_consulta():
     tipos_validos = ["matricula", "pagos", "constancia", "plataforma", "otro"]
     
     while True:
-        print("Tipos permitidos: matricula, pagos, constancia, plataforma, otro")
+        print(f"Tipos permitidos: {', '.join(tipos_validos)}")
         tipo = input("Ingrese el tipo de consulta: ")
         if tipo in tipos_validos:
             return tipo
         print("Error: Tipo de consulta no válido. Intente nuevamente.")
 
 
+def mostrar_menu():
+    """Muestra el menú principal del sistema (función sin retorno)."""
+    print("\n========================================")
+    print("  SISTEMA DE ORIENTACIÓN Y REGISTRO")
+    print("========================================")
+    print("1. Registrar nueva solicitud")
+    print("2. Salir")
+    print("----------------------------------------")
+
+
 def registrar_datos_basicos():
-    """Registra los datos aplicando las validaciones de los requerimientos anteriores."""
+    """Registra los datos aplicando las validaciones anteriores."""
     print("\n--- REGISTRO DE SOLICITUD ---")
     codigo = validar_codigo_estudiante()
     
@@ -39,9 +48,13 @@ def registrar_datos_basicos():
 
 
 def main():
-    print("Iniciando Sistema de Orientación y Registro de Atenciones...")
-    mi_solicitud = registrar_datos_basicos()
-    print("\n¡Solicitud registrada con éxito!", mi_solicitud)
+    mostrar_menu()
+    opcion = input("Seleccione una opción: ")
+    if opcion == "1":
+        mi_solicitud = registrar_datos_basicos()
+        print("\n¡Solicitud registrada con éxito!", mi_solicitud)
+    else:
+        print("Saliendo del sistema...")
 
 
 if __name__ == "__main__":
