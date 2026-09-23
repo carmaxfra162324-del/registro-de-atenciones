@@ -49,7 +49,7 @@ def mostrar_menu():
 def mostrar_resumen_solicitud(solicitud):
     """Muestra de manera ordenada el resumen de la solicitud registrada (Req. 7)."""
     print("\n========================================")
-    print("       RESUMEN DE LA SOLICITUD")
+    print("        RESUMEN DE LA SOLICITUD")
     print("========================================")
     print(f" Código de estudiante: {solicitud['codigo']}")
     print(f" Nombre del estudiante: {solicitud['nombre']}")
@@ -80,13 +80,29 @@ def registrar_datos_basicos():
 
 
 def main():
-    mostrar_menu()
-    opcion = input("Seleccione una opción: ")
-    if opcion == "1":
-        mi_solicitud = registrar_datos_basicos()
-        mostrar_resumen_solicitud(mi_solicitud)
-    else:
-        print("Saliendo del sistema...")
+    """Función principal que permite registrar al menos tres solicitudes usando estructuras básicas."""
+    solicitudes = []
+    contador_registros = 0
+    
+    # Ciclo para permitir registrar al menos tres solicitudes sin usar break
+    while contador_registros < 3:
+        mostrar_menu()
+        opcion = input("Seleccione una opción: ")
+        
+        if opcion == "1":
+            mi_solicitud = registrar_datos_basicos()
+            mostrar_resumen_solicitud(mi_solicitud)
+            solicitudes.append(mi_solicitud)
+            contador_registros += 1
+            print(f"\n[Progreso] Solicitudes registradas: {contador_registros}/3")
+        elif opcion == "2":
+            print("Saliendo del sistema...")
+            contador_registros = 3  # Finaliza el ciclo de manera controlada
+        else:
+            print("Opción no válida. Intente nuevamente.")
+            
+    print("\n--- FIN DEL PROCESO DE REGISTRO ---")
+    print(f"Total de solicitudes procesadas en esta ejecución: {len(solicitudes)}")
 
 
 if __name__ == "__main__":
